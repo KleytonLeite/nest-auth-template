@@ -3,13 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { AuditModule } from './audit/audit.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
+import { MusicModule } from './music/music.module';
 
 @Module({
   imports: [
     AuthModule, 
     UsersModule,
+    AuditModule,
+    MusicModule,
     // TypeOrmModule.forRoot({
     //   type: process.env.DB_TYPE as 'postgres', // Cast necessário para o tipo 'postgres'
     //   host: process.env.DB_HOST,
@@ -31,7 +34,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: 'mJW9Vf0uSRhZ',
       database: 'verceldb',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // Não usar em produção!
+      synchronize: false, // Não usar em produção!
       ssl: {
         rejectUnauthorized: false
       }

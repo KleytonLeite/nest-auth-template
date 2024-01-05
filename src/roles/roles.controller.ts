@@ -1,13 +1,15 @@
-import { Controller, Post, Get, Param, Body, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Put, Delete, UseGuards, UseInterceptors } from '@nestjs/common';
 import { RoleService } from './roles.service';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from './roles.guard';
 import { Roles } from './roles.decorator';
+import { AuditInterceptor } from '../audit/AuditInterceptor';
 
 @ApiTags('roles')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Controller('roles')
+@UseInterceptors(AuditInterceptor)
+@Controller('role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
